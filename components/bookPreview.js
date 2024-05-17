@@ -23,3 +23,5 @@ class BooksPreview extends HTMLElement {
     const title = this.getAttribute("data-title");
   };
 }
+
+customElements.define("book-preview", BooksPreview);
