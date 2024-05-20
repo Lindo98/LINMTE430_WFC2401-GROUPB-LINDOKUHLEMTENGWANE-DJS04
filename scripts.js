@@ -7,7 +7,7 @@ const appState = {
 };
 
 // Initialize the app
-const initialize = () => {
+const bookPreview = () => {
   renderPreviewElements(
     appState.matches,
     document.querySelector("[data-list-items]")
@@ -235,4 +235,4 @@ const attachEventListeners = () => {
 };
 
 // Initialize the app
-initialize();
+bookPreview();
