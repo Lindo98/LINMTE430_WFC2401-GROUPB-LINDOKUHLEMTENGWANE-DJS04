@@ -1,4 +1,5 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
+import { bookPreviewBtn } from "./components/book-preview.js";
 
 // App state management
 const appState = {
@@ -20,17 +21,17 @@ const bookPreview = () => {
 };
 
 // Function to create preview elements for books and append them to the parent element
-const renderPreviewElements = (matches, parentElement) => {
-  const fragment = document.createDocumentFragment();
+// const renderPreviewElements = (matches, parentElement) => {
+//   const fragment = document.createDocumentFragment();
 
-  matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
-    const buttonElement = createPreviewButton(author, id, image, title);
-    fragment.appendChild(buttonElement);
-  });
+//   matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
+//     const buttonElement = createPreviewButton(author, id, image, title);
+//     fragment.appendChild(buttonElement);
+//   });
 
-  parentElement.innerHTML = "";
-  parentElement.appendChild(fragment);
-};
+//   parentElement.innerHTML = "";
+//   parentElement.appendChild(fragment);
+// };
 
 // Function to create preview button elements
 const createPreviewButton = (author, id, image, title) => {
@@ -133,11 +134,6 @@ const updateSearchResults = (result) => {
   closeSearchOverlay();
 };
 
-// Function to scroll to the top smoothly
-const scrollToTopSmoothly = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
 // Function to close the search overlay
 const closeSearchOverlay = () => {
   document.querySelector("[data-search-overlay]").open = false;
@@ -176,7 +172,7 @@ const displayActiveBook = (book) => {
   listDescription.innerText = book.description;
 };
 
-// Function to attach event listeners
+// Function to attach all the event listeners
 const attachEventListeners = () => {
   document
     .querySelector("[data-search-cancel]")
