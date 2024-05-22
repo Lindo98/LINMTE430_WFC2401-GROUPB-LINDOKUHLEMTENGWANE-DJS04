@@ -1,5 +1,5 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-import { bookPreviewBtn } from "./components/book-preview.js";
+// import { BookPreview } from "./components/book-preview.js";
 
 // App state management
 const appState = {
@@ -20,35 +20,45 @@ const bookPreview = () => {
   attachEventListeners();
 };
 
-// Function to create preview elements for books and append them to the parent element
-// const renderPreviewElements = (matches, parentElement) => {
-//   const fragment = document.createDocumentFragment();
-
-//   matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
-//     const buttonElement = createPreviewButton(author, id, image, title);
-//     fragment.appendChild(buttonElement);
-//   });
-
-//   parentElement.innerHTML = "";
-//   parentElement.appendChild(fragment);
-// };
-
-// Function to create preview button elements
-const createPreviewButton = (author, id, image, title) => {
-  const buttonElement = document.createElement("button");
-  buttonElement.classList.add("preview");
-  buttonElement.setAttribute("data-preview", id);
-
-  buttonElement.innerHTML = `
-    <img class="preview__image" src="${image}" />
-    <div class="preview__info">
-      <h3 class="preview__title">${title}</h3>
-      <div class="preview__author">${authors[author]}</div>
-    </div>
-  `;
-
-  return buttonElement;
+const bookPreviewElement = document.querySelector("book-preview");
+bookPreviewElement.book = {
+  book: {
+    id: "1",
+    image: "path/to/image.jpg",
+    title: "Book Title",
+  },
+  author: "Author Name",
 };
+
+// Function to create preview elements for books and append them to the parent element
+const renderPreviewElements = (matches, parentElement) => {
+  const fragment = document.createDocumentFragment();
+
+  matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
+    const buttonElement = createPreviewButton(author, id, image, title);
+    fragment.appendChild(buttonElement);
+  });
+
+  parentElement.innerHTML = "";
+  parentElement.appendChild(fragment);
+};
+
+//Function to create preview button elements
+// const createPreviewButton = (author, id, image, title) => {
+//   const buttonElement = document.createElement("button");
+//   buttonElement.classList.add("preview");
+//   buttonElement.setAttribute("data-preview", id);
+
+//   buttonElement.innerHTML = `
+//     <img class="preview__image" src="${image}" />
+//     <div class="preview__info">
+//       <h3 class="preview__title">${title}</h3>
+//       <div class="preview__author">${authors[author]}</div>
+//     </div>
+//   `;
+
+//   return buttonElement;
+// };
 
 // Function to populate select options for genres or authors
 const populateSelectOptions = (data, selector, defaultText) => {

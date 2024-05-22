@@ -1,4 +1,4 @@
-class BookDetails extends HTMLElement {
+export class BookDetails extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
