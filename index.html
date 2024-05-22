@@ -91,15 +91,37 @@
       </div>
     </header>
 
+    <!-- <preview-button author="John Doe" id="123" image="path/to/image.jpg" title="Sample Book"></preview-button> -->
+
+
     <main class="list">
       <div class="list__items" data-list-items></div>
       <div class="list__message" data-list-message>No results found. Your filters might be too narrow.</div>
       <button class="list__button" data-list-button></button>
     </main>
 
-    <book-previews books='[{"author": 1, "id": "1", "image": "path/to/image.jpg", "title": "Book Title"}]' authors='{"1": "Author Name"}'></book-previews>
+
+    <dialog class="overlay" data-list-active>
+      <div class="overlay__preview"><img class="overlay__blur" data-list-blur src=""/><img class="overlay__image" data-list-image src=""/></div>
+      <div class="overlay__content">
+        <h3 class="overlay__title" data-list-title></h3>
+        <div class="overlay__data" data-list-subtitle></div>
+        <p class="overlay__data overlay__data_secondary" data-list-description></p>
+      </div>
+
+      <div class="overlay__row">
+        <button class="overlay__button overlay__button_primary" data-list-close>Close</button>
+      </div>
+    </dialog>
 
 
+    <dialog class="overlay" data-search-overlay>
+      <div class="overlay__content">
+        <form class="overlay__form" data-search-form id="search">
+          <label class="overlay__field">
+            <div class="overlay__label">Title</div>
+            <input class="overlay__input" data-search-title name="title" placeholder="Any"></input>
+          </label>
 
           <label class="overlay__field">
             <div class="overlay__label">Genre</div>

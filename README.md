@@ -8,7 +8,7 @@ The "Book Connect" project provides an opportunity for students to refine a full
 
 #### Goals
 
-- **Refactor Existing Code**: Analyse and refactor the given JavaScript and HTML code to improve its structure using objects and functions.
+- **Refactor Existing Code**: Analyzed and refactored the given JavaScript and HTML code to improve its structure using objects and functions.
 - **Implement Abstraction**: Use abstraction to hide the complex reality while exposing only the necessary parts. This involves creating more generic functions that can perform tasks in a more flexible way.
 - **Documentation**: Write clear comments and documentation for the new code structure to explain the purpose and functionality of code blocks, functions, and objects.
 - **Follow Styleguides**: Adhere to established coding conventions and Styleguides to ensure code readability and maintainability.
@@ -31,6 +31,12 @@ After completing the tasks, prepare a brief presentation for your coaching group
 - How abstraction has made the code more maintainable and extendable.
 - Any challenges faced during the refactoring process and how they were overcome.
 - Reflections on how this exercise has deepened your understanding of JavaScript programming concepts.
+
+#### My reflections / struggles
+
+- I had a lot of issues with this challenge, my component does not display the information and I have imported it to my script
+- I am unable to display the book details when I click on the book
+- 
 
 #### Submission Guidelines
 

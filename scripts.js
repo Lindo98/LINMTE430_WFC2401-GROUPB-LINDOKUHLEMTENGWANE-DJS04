@@ -1,5 +1,5 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-// import { BookPreview } from "./components/book-preview.js";
+import { createPreviewButton } from "./components/book-preview.js";
 
 // App state management
 const appState = {
@@ -7,8 +7,25 @@ const appState = {
   matches: books,
 };
 
+// Function to render preview elements
+const renderPreviewElements = (matches, parentElement) => {
+  const fragment = document.createDocumentFragment();
+
+  matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
+    const buttonElement = document.createElement("preview-button");
+    buttonElement.setAttribute("author", author);
+    buttonElement.setAttribute("id", id);
+    buttonElement.setAttribute("image", image);
+    buttonElement.setAttribute("title", title);
+    fragment.appendChild(buttonElement);
+  });
+
+  parentElement.innerHTML = "";
+  parentElement.appendChild(fragment);
+};
+
 // Initialize the app
-const bookPreview = () => {
+const initialize = () => {
   renderPreviewElements(
     appState.matches,
     document.querySelector("[data-list-items]")
@@ -19,46 +36,6 @@ const bookPreview = () => {
   updateShowMoreButton();
   attachEventListeners();
 };
-
-const bookPreviewElement = document.querySelector("book-preview");
-bookPreviewElement.book = {
-  book: {
-    id: "1",
-    image: "path/to/image.jpg",
-    title: "Book Title",
-  },
-  author: "Author Name",
-};
-
-// Function to create preview elements for books and append them to the parent element
-const renderPreviewElements = (matches, parentElement) => {
-  const fragment = document.createDocumentFragment();
-
-  matches.slice(0, BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
-    const buttonElement = createPreviewButton(author, id, image, title);
-    fragment.appendChild(buttonElement);
-  });
-
-  parentElement.innerHTML = "";
-  parentElement.appendChild(fragment);
-};
-
-//Function to create preview button elements
-// const createPreviewButton = (author, id, image, title) => {
-//   const buttonElement = document.createElement("button");
-//   buttonElement.classList.add("preview");
-//   buttonElement.setAttribute("data-preview", id);
-
-//   buttonElement.innerHTML = `
-//     <img class="preview__image" src="${image}" />
-//     <div class="preview__info">
-//       <h3 class="preview__title">${title}</h3>
-//       <div class="preview__author">${authors[author]}</div>
-//     </div>
-//   `;
-
-//   return buttonElement;
-// };
 
 // Function to populate select options for genres or authors
 const populateSelectOptions = (data, selector, defaultText) => {
@@ -144,6 +121,11 @@ const updateSearchResults = (result) => {
   closeSearchOverlay();
 };
 
+// Function to scroll to the top smoothly
+const scrollToTopSmoothly = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 // Function to close the search overlay
 const closeSearchOverlay = () => {
   document.querySelector("[data-search-overlay]").open = false;
@@ -182,7 +164,7 @@ const displayActiveBook = (book) => {
   listDescription.innerText = book.description;
 };
 
-// Function to attach all the event listeners
+// Function to attach event listeners
 const attachEventListeners = () => {
   document
     .querySelector("[data-search-cancel]")
@@ -241,4 +223,4 @@ const attachEventListeners = () => {
 };
 
 // Initialize the app
-bookPreview();
+initialize();
