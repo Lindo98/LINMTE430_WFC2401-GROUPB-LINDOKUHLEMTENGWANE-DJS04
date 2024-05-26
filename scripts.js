@@ -9,7 +9,7 @@ bookList.init();
  * Handles the search form submission.
  * @param {Event} event - The form submission event.
  */
-const handleSearch = (event) => {
+function handleSearch(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const filters = Object.fromEntries(formData);
@@ -17,26 +17,26 @@ const handleSearch = (event) => {
   const searchOverlay = document.querySelector("[data-search-overlay]");
   bookList.filterBooks(filters, messageElement, searchOverlay);
   window.scrollTo({ top: 0, behavior: "smooth" });
-};
+}
 
 /**
  * Handles the settings form submission.
  * @param {Event} event - The form submission event.
  */
-const handleSettingsSubmit = (event) => {
+function handleSettingsSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const { theme: themeOption } = Object.fromEntries(formData);
   theme.toggleTheme();
   console.log(themeOption);
   document.querySelector("[data-settings-overlay]").open = false;
-};
+}
 
 /**
  * Handles click events on the book list items.
  * @param {Event} event - The click event.
  */
-const handleListClick = (event) => {
+function handleListClick(event) {
   const pathArray = Array.from(event.path || event.composedPath());
   let active = null;
   for (const node of pathArray) {
@@ -52,8 +52,7 @@ const handleListClick = (event) => {
   bookPreview.addEventListener("close", () => {
     document.body.removeChild(bookPreview);
   });
-};
-
+}
 // Event listeners
 document
   .querySelector("[data-search-form]")
@@ -61,26 +60,38 @@ document
 document
   .querySelector("[data-settings-form]")
   .addEventListener("submit", handleSettingsSubmit);
+// remember to move to preview component
 document
   .querySelector("[data-list-items]")
   .addEventListener("click", handleListClick);
-document.querySelector("[data-search-cancel]").addEventListener("click", () => {
-  document.querySelector("[data-search-overlay]").open = false;
-});
+document
+  .querySelector("[data-search-cancel]")
+  .addEventListener(
+    "click",
+    () => (document.querySelector("[data-search-overlay]").open = false)
+  );
 document
   .querySelector("[data-settings-cancel]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = false;
-  });
+  .addEventListener(
+    "click",
+    () => (document.querySelector("[data-settings-overlay]").open = false)
+  );
 document.querySelector("[data-header-search]").addEventListener("click", () => {
   document.querySelector("[data-search-overlay]").open = true;
   document.querySelector("[data-search-title]").focus();
 });
 document
   .querySelector("[data-header-settings]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = true;
-  });
-document.querySelector("[data-list-button]").addEventListener("click", () => {
-  bookList.showMoreBooks.bind(bookList)();
-});
+  .addEventListener(
+    "click",
+    () => (document.querySelector("[data-settings-overlay]").open = true)
+  );
+// document
+//   .querySelector('[data-list-close]')
+//   .addEventListener(
+//     'click',
+//     () => (document.querySelector('[data-list-active]').open = false),
+//   );
+document
+  .querySelector("[data-list-button]")
+  .addEventListener("click", bookList.showMoreBooks.bind(bookList));
